@@ -1,38 +1,5 @@
 {
   "users": {
-    "6289513081052@s.whatsapp.net": {
-      "serialNumber": "4ebd1f1e5d6e57d42b5981e1a96fe691",
-      "title": "User",
-      "afkTime": -1,
-      "badword": 0,
-      "afkReason": "",
-      "nick": "Adrian",
-      "premium": false,
-      "limit": 5,
-      "totalLimit": 0
-    },
-    "6285262556649@s.whatsapp.net": {
-      "serialNumber": "5a632ef9f58be06a03a056901e92ecbd",
-      "title": "Premium",
-      "afkTime": -1,
-      "badword": 0,
-      "afkReason": "",
-      "nick": "༂༇⃢⃟𝑿𝒆𝒃𝒆𝒓𝒍𝒉𝒚𝒏̊̇ͥ  ͣ   ͫ͢",
-      "premium": "true",
-      "limit": 1000,
-      "totalLimit": 0
-    },
-    "6281321850045@s.whatsapp.net": {
-      "serialNumber": "a77c75d6e98dee43856db0ff8bfa14dc",
-      "title": "User",
-      "afkTime": -1,
-      "badword": 0,
-      "afkReason": "",
-      "nick": "idk",
-      "premium": "false",
-      "limit": 5,
-      "totalLimit": 0
-    },
     "6282268407522@s.whatsapp.net": {
       "serialNumber": "e951083f56865b5e862197d90e88a126",
       "title": "User",
