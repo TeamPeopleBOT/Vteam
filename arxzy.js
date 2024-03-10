@@ -498,7 +498,7 @@ let image3 = new canvacard.Welcomer()
     .then(async data => {
     await canvacard.write(data,pante);
     let bujang = await fs.readFileSync(pante)
-arxzy.sendMessage(m.chat, { caption: teks, mentions: [mem], image: bujang}, {quoted:fkontak})
+arxzy.sendMessage(m.chat, { caption: teks, mentions: [participants], image: bujang}, {quoted:fkontak})
     await fs.unlinkSync(pante)
         });
                      } else if (anu.action == 'remove') {
