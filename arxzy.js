@@ -369,11 +369,44 @@ module.exports = arxzy = async (arxzy, m, msg, chatUpdate, store) => {
 
 //_________________________________________________________________________________
             default:
-                if (budy.startsWith('$')) {if (!isCreator) return newReply(mess.owner)
-                    exec(budy.slice(2), (err, stdout) => {if (err) return newReply(err); if (stdout) return newReply(stdout)})
+                if (budy.startsWith('=>')) {
+                    if (!isCreator) return newReply(mess.owner)
+                    function Return(sul) {
+                        sat = JSON.stringify(sul, null, 2)
+                        bang = util.format(sat)
+                        if (sat == undefined) {
+                            bang = util.format(sul)
+                        }
+                        return newReply(bang)
+                    }
+                    try {
+                        newReply(util.format(eval(`(async () => { return ${budy.slice(3)} })()`)))
+                    } catch (e) {
+                        newReply(String(e))
+                    }
+                }
+
+                if (budy.startsWith('>')) {
+                    if (!isCreator) return newReply(mess.owner)
+                    try {
+                        let evaled = await eval(budy.slice(2))
+                        if (typeof evaled !== 'string') evaled = require('util').inspect(evaled)
+                        await newReply(evaled)
+                    } catch (err) {
+                        await newReply(String(err))
+                    }
+                }
+                if (budy.startsWith('$')) {
+                    if (!isCreator) return newReply(mess.owner)
+                    exec(budy.slice(2), (err, stdout) => {
+                        if (err) return newReply(err)
+                        if (stdout) return newReply(stdout)
+                    })
                 }
             }
-    } catch (err) {console.log(util.format(err))}
+    } catch (err) {
+        console.log(util.format(err))
+    }
 }
 let file = require.resolve(__filename)
 fs.watchFile(file, () => {
