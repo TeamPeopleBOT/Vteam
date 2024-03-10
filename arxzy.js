@@ -26,7 +26,7 @@ const speed = require('performance-now')
 const ms = toMs = require('ms')
 const axios = require('axios')
 const fetch = require('node-fetch')
-const yts = require('yt-search')
+//const yts = require('yt-search')
 const gis = require('g-i-s')
 const { randomBytes } = require('crypto')
 const {
