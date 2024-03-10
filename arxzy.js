@@ -110,8 +110,32 @@ const ImageArxzy = JSON.parse(fs.readFileSync('./src/media/image.json'))
 const VideoArxzy = JSON.parse(fs.readFileSync('./src/media/video.json'))
 /* ~~~~~~~~~ WAKTU SETEMPAT ~~~~~~~~~ */
 
-moment.tz.setDefault("Asia/Jakarta").locale("id")
 
+
+const kontol = fs.readFileSync('FANDYS.jpg')
+const barat = moment.tz('Asia/Jakarta').format('HH:mm:ss')
+const tggl = (numer) => {
+	            myMonths = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+				myDays = ['Minggu','Senin','Selasa','Rabu','Kamis','Jum’at','Sabtu']; 
+				var tgl = new Date(numer);
+				var day = tgl.getDate()
+				bulan = tgl.getMonth()
+				var thisDay = tgl.getDay(),
+				thisDay = myDays[thisDay];
+				var yy = tgl.getYear()
+				var year = (yy < 1000) ? yy + 1900 : yy; 
+				const time = moment.tz('Asia/Jakarta').format('DD/MM HH:mm:ss')
+				let d = new Date
+				let locale = 'id'
+				let gmt = new Date(0).getTime() - new Date('1 January 1970').getTime()
+				let weton = ['Pahing', 'Pon','Wage','Kliwon','Legi'][Math.floor(((d * 1) + gmt) / 84600000) % 5]
+				return`${thisDay}, ${day} - ${myMonths[bulan]} - ${year}`
+}
+
+
+
+
+moment.tz.setDefault("Asia/Jakarta").locale("id")
 const hariini = moment.tz('Asia/Jakarta').format('dddd, DD MMMM YYYY')
 const wib = moment.tz('Asia/Jakarta').format('HH:mm:ss')
 const waktu = moment().tz('Asia/Jakarta').format('HH:mm:ss')
@@ -167,6 +191,7 @@ module.exports = arxzy = async (arxzy, m, msg, chatUpdate, store) => {
         const botNumber = await arxzy.decodeJid(arxzy.user.id)
         const itsMe = m.sender == botNumber ? true : false
         const sender = m.sender
+        const senderNumber = sender.split("@")[0];
         const text = q = args.join(" ")
         const from = m.key.remoteJid
         const fatkuns = (m.quoted || m)
@@ -193,7 +218,7 @@ module.exports = arxzy = async (arxzy, m, msg, chatUpdate, store) => {
         const isAsu = body.startsWith(pric)
         const isCommand = isAsu ? body.replace(pric, '').trim().split(/ +/).shift().toLowerCase() : ""
         const sticker = []
-        const isAdrian = ('6289513081052@s.whatsapp.net').includes(m.sender)
+        const isAdrian = ('6285262556649@s.whatsapp.net').includes(m.sender)
         /* ~~~~~~~~~ GROUP SYSTEM ~~~~~~~~~ */
         const isGroup = m.key.remoteJid.endsWith('@g.us')
         const groupMetadata = m.isGroup ? await arxzy.groupMetadata(m.chat).catch(e => {}) : ''
@@ -419,6 +444,8 @@ module.exports = arxzy = async (arxzy, m, msg, chatUpdate, store) => {
                 vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${arxzy.getName(i + '@s.whatsapp.net')}\nFN:${arxzy.getName(i + '@s.whatsapp.net')}\nitem1.TEL;waid=${i}:${i}\nitem1.X-ABLabel:Ponsel\nitem2.EMAIL;type=INTERNET:creator@arxzy.my.id\nitem2.X-ABLabel:Email\nitem3.URL:https://api.zeoxr.my.id\nitem3.X-ABLabel:Rest APIs\nitem4.ADR:;;Indonesia;;;;\nitem4.X-ABLabel:Region\nEND:VCARD`
             })
         }
+
+
         /* ~~~~~~~~~ CONSOLE ~~~~~~~~~ */
         if (isCommand) {
             console.log(`<================>`)
@@ -426,8 +453,65 @@ module.exports = arxzy = async (arxzy, m, msg, chatUpdate, store) => {
             console.log(`<================>`)
             // global.db.data.settings[botNumber].totalhit += 1
         }
-        /* ~~~~~~~~~ RESPON ~~~~~~~~~ */
 
+
+
+        if (db.data.chats[from].notification.status) {
+            arxzy.ev.on('group-participants.update', async (anu) => {
+               try {
+                  let metadata = await arxzy.groupMetadata(anu.id)
+                  let par = anu.participants
+                  for (let i of par) {
+                     let ppimg = await arxzy.profilePictureUrl(i, 'image').catch(_ => 'https://i.ibb.co/sVsHmzs/20240229-221304.png')
+                     if (anu.action == 'add') {
+const fkontak = { key: {fromMe: false,participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: `0@s.whatsapp.net` } : {}) }, message: { 'contactMessage': { 'displayName': `${arxzy.getName(i)}`, 'vcard': `BEGIN:VCARD\nVERSION:3.0\nN:XL;${arxzy.getName(i)},;;;\nFN:${arxzy.getName(i)},\nitem1.TEL;waid=${sender.split('@')[0]}:${sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD`, 'jpegThumbnail': kontol}}}
+const canvacard = require("canvacard");
+let teks =`── ❖ ❍ 「𝐖𝐞𝐥𝐥𝐜𝐨𝐦𝐞 𝐌𝐞𝐬𝐬𝐚𝐠𝐞 」 ❍ ❖ ──
+• *_Tanggal_* : ${tggl(new Date)}
+• *_Jam_* :  ${barat } WIB
+• *_Info Profile_* :
+    ╰≻  *_• Name :_* @${senderNumber}
+    
+╭─────────────────────────
+│Selamat datang dan selamat bergabung di Group
+│🌇 *_${metadata.subject}_*🌇
+│semoga betah dan makin akrab ya. 😊😊
+╰─────────────────────────
+
+_*𝑪𝒐𝒑𝒚𝒓𝒊𝒈𝒉𝒕 • 𝟐𝟎𝟐𝟒*_`
+let its = await getBuffer (ppimg)
+const background = "https://i.ibb.co/2NbmrX0/20240303-222837.png";
+let image3 = new canvacard.Welcomer()
+    .setAvatar(ppimg)
+    .setBackground('IMAGE', background)
+    .setTitulo(`${arxzy.getName(i)}`)
+    .setTypeOverlay("ROUNDED")
+    .setSubtitulo("Selamat datang jangan lupa untuk terus bernapas.")
+    .setColor("border", "#A6A6A6CC")
+    .setColorTitulo("#FFFFFF")
+    .setColorSubtitulo("#FF0000")
+    .setColorCircle("#A6A6A6CC")
+    .setColorOverlay("#A6A6A600")
+    .setOpacityOverlay("0.4")
+    let pante = await getRandom(".png")
+    image3.build()
+    .then(async data => {
+    await canvacard.write(data,pante);
+    let bujang = await fs.readFileSync(pante)
+arxzy.sendMessage(m.chat, { caption: teks, mentions: [mem], image: bujang}, {quoted:fkontak})
+    await fs.unlinkSync(pante)
+        });
+                     } else if (anu.action == 'remove') {
+                        await arxzy.sendMessage(m.chat, {text: db.data.group[from].notification.text_left ? db.data.group[from].notification.text_left : Styles(`Selamat Tinggal ${arxzy.getName(i)}`), contextInfo: { externalAdReply: { showAdAttribution: true, title: Styles(`Selamat Tinggal ${arxzy.getName(i)}`), body: '', thumbnailUrl: 'https://telegra.ph/file/4a38ee1a1214456282f78.jpg', sourceUrl: global.link, mediaType: 1, renderLargerThumbnail: false }}})
+                     }
+                  }
+               } catch (err) {
+                  console.log(err)
+               }
+            })
+        }
+
+//_________________________________________________________________________________
         switch (isCommand) {
 
             case 'tagall':
@@ -447,6 +531,24 @@ module.exports = arxzy = async (arxzy, m, msg, chatUpdate, store) => {
                     quoted: m
                 })
             break
+
+            case 'welcome':
+            case 'left': {
+               if (!groupAdmins && !isCreator) return newReply(mess.admin)
+               if (args.length < 1) return newReply('enable/disable?')
+               if (args[0] === 'enable') {
+                  db.data.chats[from].notification.status = true
+                  newReply(`${command} is enable`)
+               } else if (args[0] === 'disable') {
+                  db.data.chats[from].notification.status = false
+                  newReply(`${command} is disable`)
+               }
+            }
+            break
+
+
+
+//_________________________________________________________________________________
             default:
                 if (budy.startsWith('=>')) {
                     if (!isCreator) return newReply(mess.owner)
