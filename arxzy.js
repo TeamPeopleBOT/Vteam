@@ -479,7 +479,6 @@ let teks =`── ❖ ❍ 「𝐖𝐞𝐥𝐥𝐜𝐨𝐦𝐞 𝐌𝐞𝐬𝐬�
 ╰─────────────────────────
 
 _*𝑪𝒐𝒑𝒚𝒓𝒊𝒈𝒉𝒕 • 𝟐𝟎𝟐𝟒*_`
-let its = await getBuffer (ppimg)
 const background = "https://i.ibb.co/2NbmrX0/20240303-222837.png";
 let image3 = new canvacard.Welcomer()
     .setAvatar(ppimg)
