@@ -48,7 +48,7 @@ async function startAdrian() {
     const {
         state,
         saveCreds
-    } = await useMultiFileAuthState(`./.Xeberlhyn`)
+    } = await useMultiFileAuthState(`./.Vteam`)
 
     const arxzy = makeWASocket({
         logger: pino({
