@@ -1,5 +1,19 @@
-const {BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, proto, generateWAMessageContent, generateWAMessage, prepareWAMessageMedia, areJidsSameUser, getContentType} = require('@whiskeysockets/baileys')
-const {smsg, getGroupAdmins, formatp, tanggal, jam, formatDate, getTime, isUrl, await, sleep, clockString, msToDate, sort, toNumber, enumGetKey, runtime, fetchJson, getBuffer, json, delay, format, logic, generateProfilePicture, parseMention, getRandom, pickRandom, totalcase} = require('./lib/myfunc')
+/*
+   Created By ArxzyDev
+   My Contact wa.me/6289513081052
+   Rxzy-MD V1.1.0
+*/
+const {
+    BufferJSON,
+    WA_DEFAULT_EPHEMERAL,
+    generateWAMessageFromContent,
+    proto,
+    generateWAMessageContent,
+    generateWAMessage,
+    prepareWAMessageMedia,
+    areJidsSameUser,
+    getContentType
+} = require('@whiskeysockets/baileys')
 const os = require('os')
 const fs = require('fs')
 const fsx = require('fs-extra')
@@ -12,19 +26,79 @@ const speed = require('performance-now')
 const ms = toMs = require('ms')
 const axios = require('axios')
 const fetch = require('node-fetch')
+//const yts = require('yt-search')
 const gis = require('g-i-s')
 const { randomBytes } = require('crypto')
-const {exec, spawn, execSync } = require("child_process")
-const {performance} = require('perf_hooks')
+const {
+    exec,
+    spawn,
+    execSync
+} = require("child_process")
+const {
+    performance
+} = require('perf_hooks')
 const more = String.fromCharCode(8206)
 const readmore = more.repeat(4001)
-const {TelegraPh, UploadFileUgu, webp2mp4File, floNime} = require('./lib/uploader')
-const {toAudio, toPTT, toVideo, ffmpeg, addExifAvatar} = require('./lib/converter')
-const {addPremiumUser, getPremiumExpired, getPremiumPosition, expiredPremiumCheck, checkPremiumUser, getAllPremiumUser} = require('./lib/premiun');
-const {addOwnerUser, getOwnerExpired, getOwnerPosition, expiredOwnerCheck, checkOwnerUser, getAllOwnerUser} = require('./lib/owner');
-
-
-
+const {
+    TelegraPh,
+    UploadFileUgu,
+    webp2mp4File,
+    floNime
+} = require('./lib/uploader')
+const {
+    toAudio,
+    toPTT,
+    toVideo,
+    ffmpeg,
+    addExifAvatar
+} = require('./lib/converter')
+const {
+    smsg,
+    getGroupAdmins,
+    formatp,
+    tanggal,
+    jam,
+    formatDate,
+    getTime,
+    isUrl,
+    await,
+    sleep,
+    clockString,
+    msToDate,
+    sort,
+    toNumber,
+    enumGetKey,
+    runtime,
+    fetchJson,
+    getBuffer,
+    json,
+    delay,
+    format,
+    logic,
+    generateProfilePicture,
+    parseMention,
+    getRandom,
+    pickRandom,
+    totalcase
+} = require('./lib/myfunc')
+/* ~~~~~~~~~ FUNTION SYSTEM ~~~~~~~~~ */
+const {
+    addPremiumUser,
+    getPremiumExpired,
+    getPremiumPosition,
+    expiredPremiumCheck,
+    checkPremiumUser,
+    getAllPremiumUser,
+} = require('./lib/premiun');
+const {
+	addOwnerUser,
+	getOwnerExpired,
+	getOwnerPosition,
+	expiredOwnerCheck,
+	checkOwnerUser,
+	getAllOwnerUser,
+} = require('./lib/owner');
+/* ~~~~~~~~~ DATA GAME ~~~~~~~~~ */
 /* ~~~~~~~~~ DATA ~~~~~~~~~ */
 let bad = JSON.parse(fs.readFileSync('./src/data/function/badword.json'))
 let premium = JSON.parse(fs.readFileSync('./src/data/role/premium.json'))
@@ -41,17 +115,27 @@ moment.tz.setDefault("Asia/Jakarta").locale("id")
 const hariini = moment.tz('Asia/Jakarta').format('dddd, DD MMMM YYYY')
 const wib = moment.tz('Asia/Jakarta').format('HH:mm:ss')
 const waktu = moment().tz('Asia/Jakarta').format('HH:mm:ss')
-if (waktu < "23:59:00") {var ucapanWaktu = 'Selamat Malam 🏙️'}
-if (waktu < "19:00:00") {var ucapanWaktu = 'Selamat Petang 🌆'}
-if (waktu < "18:00:00") {var ucapanWaktu = 'Selamat Sore 🌇'}
-if (waktu < "15:00:00") {var ucapanWaktu = 'Selamat Siang 🌤️'}
-if (waktu < "10:00:00") {var ucapanWaktu = 'Selamat Pagi 🌄'}
-if (waktu < "05:00:00") {var ucapanWaktu = 'Selamat Subuh 🌆'}
-if (waktu < "03:00:00") {var ucapanWaktu = 'Selamat Tengah Malam 🌃'}
-
-
-
-
+if (waktu < "23:59:00") {
+    var ucapanWaktu = 'Selamat Malam 🏙️'
+}
+if (waktu < "19:00:00") {
+    var ucapanWaktu = 'Selamat Petang 🌆'
+}
+if (waktu < "18:00:00") {
+    var ucapanWaktu = 'Selamat Sore 🌇'
+}
+if (waktu < "15:00:00") {
+    var ucapanWaktu = 'Selamat Siang 🌤️'
+}
+if (waktu < "10:00:00") {
+    var ucapanWaktu = 'Selamat Pagi 🌄'
+}
+if (waktu < "05:00:00") {
+    var ucapanWaktu = 'Selamat Subuh 🌆'
+}
+if (waktu < "03:00:00") {
+    var ucapanWaktu = 'Selamat Tengah Malam 🌃'
+}
 /* ~~~~~~~~~ SCRIPT & FUNCTION  ~~~~~~~~~ */
 const reSize = async(buffer, ukur1, ukur2) => {
    return new Promise(async(resolve, reject) => {
@@ -65,7 +149,13 @@ const reSize = async(buffer, ukur1, ukur2) => {
 module.exports = arxzy = async (arxzy, m, msg, chatUpdate, store) => {
     try {
         /* ~~~~~~~~~ BASE ARXZYDEV ~~~~~~~~~ */
-        const {type, quotedMsg, mentioned, now, fromMe} = m
+        const {
+            type,
+            quotedMsg,
+            mentioned,
+            now,
+            fromMe
+        } = m
         var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectnewReply.selectedRowId : (m.mtype == 'templateButtonnewReplyMessage') ? m.message.templateButtonnewReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectnewReply.selectedRowId || m.text) : ''
         var budy = (typeof m.text == 'string' ? m.text : '')
         var prefix = ['.', '/'] ? /^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi.test(body) ? body.match(/^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi)[0] : "" : prefa
@@ -119,9 +209,7 @@ module.exports = arxzy = async (arxzy, m, msg, chatUpdate, store) => {
         const isPremium = isCreator || checkPremiumUser(m.sender, premium);
         expiredPremiumCheck(arxzy, m, premium);
         expiredOwnerCheck(arxzy, m, _owner);
-
-
-//______________REPLY MESSAGE___________________________________________________________________
+        /* ~~~~~~~~~ REPLY ~~~~~~~~~ */
         async function newReply(teks) {
             if (typereply === 'v1') {
                 m.reply(teks)
@@ -158,8 +246,6 @@ module.exports = arxzy = async (arxzy, m, msg, chatUpdate, store) => {
                }, { quoted: m })
             }
         }
-
-//_________________FAKE MESSAGE________________________________________________________________
         let fstatus = { 
             key: { 
                fromMe: false, 
@@ -184,9 +270,7 @@ module.exports = arxzy = async (arxzy, m, msg, chatUpdate, store) => {
                   }
                }
             }
-//_________________________________________________________________________________
-
-
+        
         /* ~~~~~~~~~ Global Database ~~~~~~~~~ */
         try {
             let isNumber = x => typeof x === 'number' && !isNaN(x)
@@ -340,10 +424,10 @@ module.exports = arxzy = async (arxzy, m, msg, chatUpdate, store) => {
             console.log(`<================>`)
             console.log(chalk.black(chalk.bgWhite(!isCommand ? '<\> MESSAGE </>' : '<\> COMMAND </>')), chalk.black(chalk.bgGreen(hariini)), chalk.black(chalk.bgBlue(budy || m.mtype)) + '\n' + chalk.magenta('=> From'), chalk.green(pushname), chalk.yellow(m.sender) + '\n' + chalk.blueBright('=> In'), chalk.green(m.isGroup ? pushname : 'Private Chat', m.chat))
             console.log(`<================>`)
+            // global.db.data.settings[botNumber].totalhit += 1
+        }
+        /* ~~~~~~~~~ RESPON ~~~~~~~~~ */
 
-
-
-//_________________________________________________________________________________
         switch (isCommand) {
 
             case 'tagall':
@@ -363,11 +447,6 @@ module.exports = arxzy = async (arxzy, m, msg, chatUpdate, store) => {
                     quoted: m
                 })
             break
-
-
-
-
-//_________________________________________________________________________________
             default:
                 if (budy.startsWith('=>')) {
                     if (!isCreator) return newReply(mess.owner)
